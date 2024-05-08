@@ -17,6 +17,12 @@ class M_surket extends CI_Model {
 		//$this->db->like($cariberdasarkan, $data, 'both'); 
 		return $this->db->get('member');
 	}
+	public function select_member($id){
+
+      $this->db->select('*');
+	  $this->db->where('member_id',$id);
+	  return $this->db->get('member');
+	}
 
 	
 }

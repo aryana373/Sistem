@@ -78,6 +78,49 @@ require('v_header.php');
     <!-- /.content -->
   </div>
 
+  <!-- modal detail -->
+<div id="modalAddSurket" class="modal " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+
+         <div class="modal-body">
+             <div class="form-group">
+                <form role="form" method="post" action="" >
+                 <div class="card-body ">
+                        
+                           <div class="row">
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                 <label >Nama Lengkap</label>
+                                  <input id="detail_nama" type="text" class="form-control"  readonly >        
+                               </div>
+                               <div class="form-group">
+                                 <label >Id Member</label>
+                                  <input id="detail_id" type="text" class="form-control"  readonly >        
+                               </div>
+                               <div class="form-group">
+                                 <label >Institusi</label>
+                                  <input id="detail_institusi" type="text" class="form-control"  readonly >        
+                               </div>
+                              </div> 
+                          </div> 
+                      </div>
+
+
+                </form>
+              </div>
+         </div>
+         <div class="modal-footer">
+            <div class="btn-group">
+               <button type="button" id="btn_add" class="btn btn-primary btn-flat" data-dismiss="modal">Tambah</button>
+              
+            </div>
+         </div>
+         
+   </div>
+</div>
+</div>
 
   
   
@@ -127,14 +170,45 @@ require('v_footer.php');
              });
              
     }); 
+
+   // function add_surket(id) {
+      
+
+   //          $('#modalAddSurket').modal();
+   //          $.get("<?php echo base_url();?>"+"Surket/detail_member/"+id, function(detail) {
+   //          var detail=jQuery.parseJSON(detail+"");
+   //            $('#detail_nama').val(detail.member_name);
+   //            $('#detail_institusi').val(detail.inst_name);
+   //            $('#detail_id').val(detail.member_id);
+              
+              
+            
+   //            //console.log(lokasi.nama);
+   //          });
+
+
+   //  }
+   function add_surket(id) {
+            
+          $('#preloader').css('display','block');
+          $.post("<?php echo base_url();?>"+"Surket/cetak/"+id, function(data) {
+                $('#form-create-data').trigger("reset");
+                $('#preloader').css('display','none');
+                $('#main-content').html(data);
+                //dataTable();
+                //console.log(data);
+            }); 
+            
+       
+   }
   
 
-  var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
+  // var Toast = Swal.mixin({
+  //     toast: true,
+  //     position: 'top-end',
+  //     showConfirmButton: false,
+  //     timer: 3000
+  //   });
 
 
 
@@ -217,73 +291,53 @@ require('v_footer.php');
    
 
 
-   $('#btn-add-katalog').click(function(event) {
+   // $('#btn-add-katalog').click(function(event) {
            
             
            
-            var judul = $('#inputkatalog').find('#add_judul').val();
-            var pengarang = $('#inputkatalog').find('#add_pengarang ').val();
-            var penerbit = $('#inputkatalog').find('#add_penerbit').val();
-            var tahun = $('#inputkatalog').find('#add_tahun').val();
-            var harga = $('#inputkatalog').find('#add_harga').val();
-            var bahasa = $('#inputkatalog').find('#add_bahasa').val();
-            var isbn = $('#inputkatalog').find('#add_isbn').val();
+   //          var judul = $('#inputkatalog').find('#add_judul').val();
+   //          var pengarang = $('#inputkatalog').find('#add_pengarang ').val();
+   //          var penerbit = $('#inputkatalog').find('#add_penerbit').val();
+   //          var tahun = $('#inputkatalog').find('#add_tahun').val();
+   //          var harga = $('#inputkatalog').find('#add_harga').val();
+   //          var bahasa = $('#inputkatalog').find('#add_bahasa').val();
+   //          var isbn = $('#inputkatalog').find('#add_isbn').val();
 
-            if (judul==''|| pengarang==''|| penerbit==''|| tahun==''|| harga==''|| bahasa==''|| isbn=='') {
-                $("#eror").html('Data belum lengkap !!!');
-                $('#modalWarning-user').modal();
-            } 
+   //          if (judul==''|| pengarang==''|| penerbit==''|| tahun==''|| harga==''|| bahasa==''|| isbn=='') {
+   //              $("#eror").html('Data belum lengkap !!!');
+   //              $('#modalWarning-user').modal();
+   //          } 
 
-            else {
-                  $('#inputkatalog').css('display','none');
-                  $('#preloader').css('display','block');
-                   // $('#tabel-katalog').css('display', 'none');
-                   $.post( "<?php echo base_url();?>"+"Buku/tambah_katalog/", {judul: judul, pengarang:pengarang, penerbit: penerbit, tahun: tahun,harga:harga, bahasa:bahasa, isbn:isbn }, function(data) {
-                        $('#form-create-katalog').trigger("reset");
-                        $('#input').css('display','block');
+   //          else {
+   //                $('#inputkatalog').css('display','none');
+   //                $('#preloader').css('display','block');
+   //                 // $('#tabel-katalog').css('display', 'none');
+   //                 $.post( "<?php echo base_url();?>"+"Buku/tambah_katalog/", {judul: judul, pengarang:pengarang, penerbit: penerbit, tahun: tahun,harga:harga, bahasa:bahasa, isbn:isbn }, function(data) {
+   //                      $('#form-create-katalog').trigger("reset");
+   //                      $('#input').css('display','block');
                         
-                        $('#tables-katalog').html(data);
+   //                      $('#tables-katalog').html(data);
                         
-                        $("#example1").DataTable({
-                          "responsive": true, "lengthChange": false, "autoWidth": false,
-                          "buttons": ["copy", "csv", "excel", "pdf"]
-                        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                        $('#preloader').css('display','none');
+   //                      $("#example1").DataTable({
+   //                        "responsive": true, "lengthChange": false, "autoWidth": false,
+   //                        "buttons": ["copy", "csv", "excel", "pdf"]
+   //                      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+   //                      $('#preloader').css('display','none');
 
-                        // Toast.fire({
-                        //     icon: 'success',
-                        //     title: 'Data Berhasil Disimpan!!'
-                        //   })
-                        toastr.success('Data Katalog Baru Berhasil Disimpan!!')
-                    }); 
+   //                      // Toast.fire({
+   //                      //     icon: 'success',
+   //                      //     title: 'Data Berhasil Disimpan!!'
+   //                      //   })
+   //                      toastr.success('Data Katalog Baru Berhasil Disimpan!!')
+   //                  }); 
 
-            }
+   //          }
 
              
 
-        });
+   //      });
 
-  function detail(id) {
-      
-
-            $('#modalDetail').modal();
-            $.get("<?php echo base_url();?>"+"Buku/detail_buku/"+id, function(detail) {
-            var detail=jQuery.parseJSON(detail+"");
-              $('#detail_judul').val(detail.judul);
-              $('#detail_pengarang').val(detail.pengarang);
-              $('#detail_penerbit').val(detail.penerbit);
-              $('#detail_tgl').val(detail.tgl_input);
-              $('#detail_tahun').val(detail.tahun);
-              $('#detail_harga').val(detail.harga);
-              $('#detail_bahasa').val(detail.bahasa);
-               $('#detail_isbn').val(detail.isbn);
-              
-            
-              //console.log(lokasi.nama);
-            });
-
-
-    }
+  
 
   function editBuku(id){
     $("#editkatalog").show('slow');

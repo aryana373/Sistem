@@ -35,17 +35,21 @@ class Surket extends CI_Controller {
   public function cariMember($nama){
           // $nama = $this->input->post('nama');
 
-           $data['member']=$this->M_surket->selectMember($nama);
-            $this->load->view('surket/tabel_member',$data);
+      $data['member']=$this->M_surket->selectMember($nama);
+      $this->load->view('surket/tabel_member',$data);
 
-        }
+  }
+  public function detail_member($id){
+       $detail=$this->M_surket->select_member($id)->row();
+       echo json_encode($detail);
+  }
 
 	public function cetak(){
 		
         
 
 
-          $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+          $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
           $pdf->setPrintFooter(false);
           $pdf->setPrintHeader(false);
           $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
@@ -62,25 +66,17 @@ class Surket extends CI_Controller {
           $tabel = '
           
           
-        <img style="width: 538px" src="'.base_url("assets/images/user.jpg").'" />
+        <img style="width: 1100px;" src="'.base_url("assets/images/cover.PNG").'" />
           
-          <table border="0" >
-                <tr>
-                      <th style= "  width: 35%;" > </th>
-                      <th style= "width: 65%;"></th>
-                </tr>
-
-               
-          </table>
+        
           <div style="font-family: serif;">
-          <table style="text-align: right; font-size:12  ">
+
+          <table style="text-align: center; font-size:16px  ">
             <tr><td> 
-              
-            </td></tr></table> <br><br>
-          
-          <table style="text-align: center; font-size:12  ">
+              <b>SURAT KETERANGAN BEBAS PUSTAKA</b>
+            </td></tr>
             <tr><td> 
-              <u>LETTER OF ACCEPTANCE</u>
+              No. XX/PERPUS/IV/2024
             </td></tr></table>
           
           <table border="0" >
@@ -91,19 +87,34 @@ class Surket extends CI_Controller {
           
           </table>
 
-          <table style="text-align: Justify ; font-size:13  ">
-            <tr><th><br><br>Kepada Yth. 
-              <br>Di tempat
-              <br><br><br>Dengan hormat,
-              <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dengan ini, kami mengucapkan selamat kepada Saudara karena artikel Saudara yang berjudul: 
-              <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kami ucapkan terima kasih karena telah mengirimkan artikel ilmiah Anda pada <b></b> dan kami menunggu naskah jurnal Anda pada terbitan kami di masa mendatang. 
+          <table style="text-align: Justify ; font-size:14px  ">
+            <tr><th><br><br>Yang bertanda tangan di bawah ini menerangkan bahwa: 
+              <br><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Nama &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; : Kadek Aryana Dwi Putra <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;ID Member&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 123312 <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Institusi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Universitas Udayana
+
+          
+              <br><br><br>Siswa tersebut tidak memiliki pinjaman koleksi milik Perpustakaan SMA Negeri 1 Konoha.
+              <br> *Surat ini dibawa saat pengambilan Ijazah. 
             </th></tr></table>
 
                
           
 
           
-          <br><br><br><br><br><br><br><br><br><br>
+          <br><br>
+           <table style= "font-size:13;" border="0" >
+                <tr>
+                      <th style= "width: 70%;"> <img style="width: 100px" src="'.base_url('assets/qr/qr.jpg').'"/></th>
+                      <th style= "  width: 30%;" >Konoha, 17 Agustus 2024
+                      <br> Kepala Perpustakaan
+                      <br><img style="height: 50px" src="'.base_url('assets/images/ttd.jpg').'" /><br><b>Kadek Aryana Dwi Putra</b><br>NIP. 1996043020230813001</th>
+                      
+                </tr>
+
+               
+          </table>
 
        
           

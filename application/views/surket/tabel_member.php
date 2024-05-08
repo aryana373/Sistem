@@ -18,7 +18,7 @@
                        <td><?php echo $row->register_date; ?></td>
                        <td style=" width: 100px;text-align: center;">
                             <div class="btn-group">  
-                                 <button onclick="detail(<?php echo $row->member_id; ?>);" class="btn btn-primary btn-flat" type="button" data-toggle="tooltip" title="Detail"><i class="fa fa-pen"></i></button>
+                                 <button onclick="add_surket(<?php echo $row->member_id; ?>);" class="btn btn-primary btn-flat" type="button" data-toggle="tooltip" title="tambah surat bebas pustaka"><i class="fa fa-pen"></i></button>
                                  
                                  
                                 
