@@ -61,7 +61,7 @@ require('v_header.php');
        
                   <div id="preloader" class="overlay" style="text-align: center;"><i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2">Loading...</div></div>
                   <div id="data_member">
-
+                  
                     
                   </div>
 
@@ -120,7 +120,10 @@ require('v_footer.php');
              $.post( "<?php echo base_url();?>"+"Surket/cariMember/"+nama, function(data) {
                 $('#preloader').css('display','none');
                 $('#data_member').html(data);
-                dataTable(); 
+                $("#example1").DataTable({
+                          "responsive": true, "lengthChange": false, "autoWidth": false,
+                          "buttons": ["copy", "csv", "excel", "pdf"]
+                        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
              });
              
     }); 
