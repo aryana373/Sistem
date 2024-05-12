@@ -19,9 +19,11 @@ class Surket extends CI_Controller {
 
 	public function index(){
 
-	
+    $data['jml_member']= $this->db->query('SELECT COUNT(member_id) AS num FROM member')->row()->num;
+    $data['jml_surket']=$this->db->query('SELECT COUNT(member_id) AS num FROM bp_history_surket')->row()->num;
+
 	   
-		$this->load->view('surket/v_dashboard');
+		$this->load->view('surket/v_dashboard',$data);
 
 	}
   public function menu_input(){
@@ -29,6 +31,14 @@ class Surket extends CI_Controller {
   
      
     $this->load->view('surket/v_input_surket');
+
+  }
+
+  public function menu_cari(){
+
+    $data['surket']=$this->M_surket->allSurket();
+
+    $this->load->view('surket/v_cari_surket',$data);
 
   }
 
@@ -44,8 +54,26 @@ class Surket extends CI_Controller {
        echo json_encode($detail);
   }
 
-	public function cetak(){
-		
+	public function cetak($id){
+
+        $detail=$this->M_surket->select_member($id)->row();
+
+        $nama= $detail->member_name;
+        $id= $detail->member_id;
+        $instansi=$detail->inst_name;
+        $tanggal= date("Y-m-d");
+
+        $cek = $this->db->get_where('bp_history_surket', array(
+            'member_id' => $id,
+        ));
+
+        $count = $cek->num_rows(); 
+
+        if ($count === 0) {
+            $this->M_surket->create($id,$nama, $instansi,$tanggal);
+        }
+
+         
         
 
 
@@ -90,9 +118,9 @@ class Surket extends CI_Controller {
           <table style="text-align: Justify ; font-size:14px  ">
             <tr><th><br><br>Yang bertanda tangan di bawah ini menerangkan bahwa: 
               <br><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Nama &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; : Kadek Aryana Dwi Putra <br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;ID Member&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 123312 <br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Institusi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Universitas Udayana
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Nama &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; : '.$nama.' <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;ID Member&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : '.$id.' <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;Institusi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : '.$instansi.'
 
           
               <br><br><br>Siswa tersebut tidak memiliki pinjaman koleksi milik Perpustakaan SMA Negeri 1 Konoha.
@@ -106,7 +134,7 @@ class Surket extends CI_Controller {
           <br><br>
            <table style= "font-size:13;" border="0" >
                 <tr>
-                      <th style= "width: 70%;"> <img style="width: 100px" src="'.base_url('assets/qr/qr.jpg').'"/></th>
+                      <th style= "width: 70%;"> </th>
                       <th style= "  width: 30%;" >Konoha, 17 Agustus 2024
                       <br> Kepala Perpustakaan
                       <br><img style="height: 50px" src="'.base_url('assets/images/ttd.jpg').'" /><br><b>Kadek Aryana Dwi Putra</b><br>NIP. 1996043020230813001</th>

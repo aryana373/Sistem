@@ -113,7 +113,8 @@ require('v_header.php');
          </div>
          <div class="modal-footer">
             <div class="btn-group">
-               <button type="button" id="btn_add" class="btn btn-primary btn-flat" data-dismiss="modal">Tambah</button>
+               <button type="button" onclick="add_surket();" class="btn btn-success btn-flat" data-dismiss="modal">Buat Surat Bebas Pustaka</button>
+               <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Batal</button>
               
             </div>
          </div>
@@ -171,7 +172,7 @@ require('v_footer.php');
              
     }); 
 
-   // function add_surket(id) {
+   // function detail_surket(id) {
       
 
    //          $('#modalAddSurket').modal();
@@ -188,19 +189,19 @@ require('v_footer.php');
 
 
    //  }
-   function add_surket(id) {
+   // function add_surket(id) {
             
-          $('#preloader').css('display','block');
-          $.post("<?php echo base_url();?>"+"Surket/cetak/"+id, function(data) {
-                $('#form-create-data').trigger("reset");
-                $('#preloader').css('display','none');
-                $('#main-content').html(data);
-                //dataTable();
-                //console.log(data);
-            }); 
+   //        $('#preloader').css('display','block');
+   //        $.post("<?php echo base_url();?>"+"Surket/cetak/"+id, function(data) {
+   //              $('#form-create-data').trigger("reset");
+   //              $('#preloader').css('display','none');
+   //              $('#main-content').html(data);
+   //              //dataTable();
+   //              //console.log(data);
+   //          }); 
             
        
-   }
+   // }
   
 
   // var Toast = Swal.mixin({
@@ -339,72 +340,72 @@ require('v_footer.php');
 
   
 
-  function editBuku(id){
-    $("#editkatalog").show('slow');
-    $('#input').css('display','none');
-    $('#inputkatalog').css('display','none');
+  // function editBuku(id){
+  //   $("#editkatalog").show('slow');
+  //   $('#input').css('display','none');
+  //   $('#inputkatalog').css('display','none');
 
-     $.get("<?php echo base_url();?>"+"Buku/detail_buku/"+id, function(detail) {
-            var detail=jQuery.parseJSON(detail+"");
-              $('#edit_judul').val(detail.judul);
-              $('#edit_pengarang').val(detail.pengarang);
-              $('#edit_penerbit').val(detail.penerbit);
-              $('#edit_tahun').val(detail.tahun);
-              $('#edit_harga').val(detail.harga);
-              $('#edit_bahasa').val(detail.bahasa);
-              $('#edit_isbn').val(detail.isbn);
+  //    $.get("<?php echo base_url();?>"+"Buku/detail_buku/"+id, function(detail) {
+  //           var detail=jQuery.parseJSON(detail+"");
+  //             $('#edit_judul').val(detail.judul);
+  //             $('#edit_pengarang').val(detail.pengarang);
+  //             $('#edit_penerbit').val(detail.penerbit);
+  //             $('#edit_tahun').val(detail.tahun);
+  //             $('#edit_harga').val(detail.harga);
+  //             $('#edit_bahasa').val(detail.bahasa);
+  //             $('#edit_isbn').val(detail.isbn);
               
 
-            $('#btn-edit-katalog').click(function(event) {
+  //           $('#btn-edit-katalog').click(function(event) {
 
-                  var judul = $('#editkatalog').find('#edit_judul').val();
-                  var pengarang = $('#editkatalog').find('#edit_pengarang ').val();
-                  var penerbit = $('#editkatalog').find('#edit_penerbit').val();
-                  var tahun = $('#editkatalog').find('#edit_tahun').val();
-                  var harga = $('#editkatalog').find('#edit_harga').val();
-                  var bahasa = $('#editkatalog').find('#edit_bahasa').val();
-                  var isbn = $('#editkatalog').find('#edit_isbn').val();
+  //                 var judul = $('#editkatalog').find('#edit_judul').val();
+  //                 var pengarang = $('#editkatalog').find('#edit_pengarang ').val();
+  //                 var penerbit = $('#editkatalog').find('#edit_penerbit').val();
+  //                 var tahun = $('#editkatalog').find('#edit_tahun').val();
+  //                 var harga = $('#editkatalog').find('#edit_harga').val();
+  //                 var bahasa = $('#editkatalog').find('#edit_bahasa').val();
+  //                 var isbn = $('#editkatalog').find('#edit_isbn').val();
             
             
-             if (judul==''|| pengarang==''|| penerbit==''|| tahun==''|| harga==''||harga<=0|| bahasa==''|| isbn=='') {
-                $("#eror").html('Data belum lengkap !!!');
-                $('#modalWarning-user').modal();
-                } 
+  //            if (judul==''|| pengarang==''|| penerbit==''|| tahun==''|| harga==''||harga<=0|| bahasa==''|| isbn=='') {
+  //               $("#eror").html('Data belum lengkap !!!');
+  //               $('#modalWarning-user').modal();
+  //               } 
 
-             else {
-                    $('#preloader').css('display','block');
-                    $('#editkatalog').css('display', 'none');
+  //            else {
+  //                   $('#preloader').css('display','block');
+  //                   $('#editkatalog').css('display', 'none');
 
 
                         
-                       $.post("<?php echo base_url();?>"+"Buku/update_buku/", {id:id,judul: judul, pengarang:pengarang, penerbit: penerbit, tahun: tahun,harga:harga, bahasa:bahasa, isbn:isbn }, function(data, textStatus, xhr) {
+  //                      $.post("<?php echo base_url();?>"+"Buku/update_buku/", {id:id,judul: judul, pengarang:pengarang, penerbit: penerbit, tahun: tahun,harga:harga, bahasa:bahasa, isbn:isbn }, function(data, textStatus, xhr) {
 
-                             Toast.fire({
-                                icon: 'success',
-                                title: 'Data Katalog Berhasil Dirubah!!'
-                              })
+  //                            Toast.fire({
+  //                               icon: 'success',
+  //                               title: 'Data Katalog Berhasil Dirubah!!'
+  //                             })
                             
-                            $('#input').css('display','block');
+  //                           $('#input').css('display','block');
                         
-                            $('#tables-katalog').html(data);
+  //                           $('#tables-katalog').html(data);
                             
-                            $("#example1").DataTable({
-                              "responsive": true, "lengthChange": false, "autoWidth": false,
-                              "buttons": ["copy", "csv", "excel", "pdf"]
-                            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                            $('#preloader').css('display','none');
+  //                           $("#example1").DataTable({
+  //                             "responsive": true, "lengthChange": false, "autoWidth": false,
+  //                             "buttons": ["copy", "csv", "excel", "pdf"]
+  //                           }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  //                           $('#preloader').css('display','none');
 
                            
                             
-                        }); 
+  //                       }); 
 
 
-                   }
+  //                  }
             
             
-            }); 
-        });
-        }
+  //           }); 
+  //       });
+  //       }
     
 
    

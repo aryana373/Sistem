@@ -103,7 +103,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a id="katalog" href="<?php echo base_url('Buku/katalog') ?>" class="nav-link">
+            <a id="cari_surat" href="<?php echo base_url('Surket/menu_cari') ?>" class="nav-link">
               <i class="nav-icon fas fa-search"></i>
               <p>
                 Cari Surat

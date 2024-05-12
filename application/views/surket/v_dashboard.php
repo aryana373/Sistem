@@ -22,13 +22,13 @@ require('v_header.php');
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-6 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>xx</h3>
+                <h3><?php echo $jml_member;?></h3>
 
-                <p>Buku Tercatat di Database</p>
+                <p>Total Anggota</p>
               </div>
               <div class="icon">
                 <i class="ion ion-clipboard"></i>
@@ -37,13 +37,13 @@ require('v_header.php');
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-6 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-danger">
               <div class="inner">
-                <h3>xx</h3>
+                <h3><?php echo $jml_surket;?></h3>
 
-                <p>Data Katalog</p>
+                <p>Total Surat Bebas Pustaka</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -52,35 +52,7 @@ require('v_header.php');
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>xx</h3>
-
-                <p>Pengguna</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>xx</h3>
-
-                <p>Permintaan Buku</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="<?php echo base_url('Buku/pilihan_user') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+          
 
         </div>
           <!-- ./col -->
@@ -90,7 +62,7 @@ require('v_header.php');
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-    <a href="<?php echo base_url('Surket/cetak') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    <!-- <a href="<?php echo base_url('Surket/cetak') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
   </div>
 
     
