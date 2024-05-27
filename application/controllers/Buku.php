@@ -236,6 +236,27 @@ class Buku extends CI_Controller {
 
 		}
 
+	public function sync(){
+
+		$buku_terpilih= $this->M_buku->hasil_rekomendasi();
+		foreach ($buku_terpilih->result() as $row){
+		
+			$data = array(
+			'title' => $row->judul,
+			'isbn_issn' => $row->isbn,
+			'publish_year' => $row->tahun,
+			'language_id' => $row->bahasa,
+			'input_date'	=> date("Y-m-d h:i:s"),
+			'last_update' => date("Y-m-d h:i:s"),
+			);
+			$this->db->insert('biblio', $data);
+
+		}
+
+
+
+	}
+
 
 
 

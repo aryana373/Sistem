@@ -35,6 +35,10 @@ class M_buku extends CI_Model {
 
 
 	//buku
+	// status 1 = buku yang sudah dimiliki
+	// status 2 = katalog buku
+	// status 3 = hasil sleksi
+	// status 6 = terhapus
 
 	public function select_all(){
 

@@ -47,6 +47,9 @@ require('v_header.php');
               <h5 style="color:green;">Seleksi Duplikat <i class="icon fas fa-check"></i></h5>
               <h5 style="color:green;">Seleksi Tahun   <i class="icon fas fa-check"></i> </h5>
 
+               
+              <a href="<?php echo base_url();?>Buku/sync" class="btn btn-primary btn-flat" type="button" data-toggle="tooltip" title="tambah surat bebas pustaka">Sinkoronkan dengan database koleksi buku</a>
+
                <?php }  ?>
               
               
