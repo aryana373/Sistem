@@ -240,16 +240,62 @@ class Buku extends CI_Controller {
 
 		$buku_terpilih= $this->M_buku->hasil_rekomendasi();
 		foreach ($buku_terpilih->result() as $row){
+
+			//cek dan insert penerbit
+
+			$id_penerbit= $this->M_buku->cek_penerbit($row->penerbit);
+
 		
-			$data = array(
+			$data_biblio = array(
+			'gmd_id' => '1',
 			'title' => $row->judul,
 			'isbn_issn' => $row->isbn,
+			'publisher_id'=>$id_penerbit,
 			'publish_year' => $row->tahun,
+			'classification'=> 'NONE',
 			'language_id' => $row->bahasa,
 			'input_date'	=> date("Y-m-d h:i:s"),
 			'last_update' => date("Y-m-d h:i:s"),
+			'uid'=> 1,
 			);
-			$this->db->insert('biblio', $data);
+
+			
+
+			$this->db->insert('biblio', $data_biblio);
+			$id = $this->db->insert_id();
+
+			//cek dan insert pengarang
+
+			$this->M_buku->cek_pengarang($row->pengarang,$id);
+
+
+
+			//insert search biblio
+
+			if ($row->bahasa=='eng') {
+				$bahasa='English';
+			} else{
+				$bahasa='Indonesia';
+			}
+
+
+			$data_search_biblio = array(
+			'biblio_id'=> $id,
+			'title' => $row->judul,
+			'isbn_issn' => $row->isbn,
+			'author' => $row->pengarang,
+			'gmd'=> 'text',
+			'publisher'=> $row->penerbit,
+			'language'=>$bahasa,
+			'classification'=> 'NONE',
+			'opac_hide'=>0,
+			'promoted'=>0,
+			'input_date'	=> date("Y-m-d h:i:s"),
+			'last_update' => date("Y-m-d h:i:s"),
+
+			);
+			$this->db->insert('search_biblio', $data_search_biblio);
+			
 
 		}
 

@@ -293,4 +293,64 @@ class M_buku extends CI_Model {
       $this->db->where('status','3');
 	  return $this->db->get('tb_buku');
 	}
+
+	public function cek_pengarang($pengarang,$id_buku){
+	  $this->db->select('*');
+	  $this->db->where('author_name',$pengarang);
+	  $query= $this->db->get('mst_author');
+
+	  $count = $query->num_rows(); 
+
+        if ($count === 0) {
+            $data = array(
+                'author_name' => $pengarang,
+                'authority_type' => 'p',
+                'input_date'=> date("Y-m-d"),
+                'last_update'=> date("Y-m-d"),
+            );
+            $this->db->insert('mst_author', $data);
+            $id_pengarang= $this->db->insert_id();
+        } else{
+			   foreach ($query->result() as $row){ 
+			  
+			     $id = $row->author_id;
+			   }   
+        	$id_pengarang= $id;
+        }
+
+       $data_biblio_author= array(
+       	'biblio_id'=>$id_buku,
+        'author_id'=>$id_pengarang,
+    	'level'=>1,
+    	);
+       $this->db->insert('biblio_author', $data_biblio_author);
+
+
+	}
+	public function cek_penerbit($penerbit){
+	  $this->db->select('*');
+	  $this->db->where('publisher_name',$penerbit);
+	  $query= $this->db->get('mst_publisher');
+
+	  $count = $query->num_rows(); 
+
+        if ($count === 0) {
+            $data_penerbit = array(
+                'publisher_name' => $penerbit,
+                'input_date'=> date("Y-m-d"),
+                'last_update'=> date("Y-m-d"),
+            );
+            $this->db->insert('mst_publisher', $data_penerbit);
+            return $this->db->insert_id();
+        } else{
+			   foreach ($query->result() as $row){ 
+			  
+			     $id = $row->publisher_name;
+			   }   
+        	return $id;
+        }
+
+
+
+	}
 }
