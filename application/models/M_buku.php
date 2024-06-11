@@ -279,6 +279,14 @@ class M_buku extends CI_Model {
 		$this->db->update('tb_curr_tahapan', $data);
 
 	}
+	public function update_sync($status){
+		$data = array(
+			'status_sync' => $status,
+			);
+		$this->db->where('id','1');
+		$this->db->update('tb_curr_tahapan', $data);
+
+	}
 
 	public function proses_cek_tahun($tahun){
 	  $this->db->select('*');

@@ -3,9 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Buku extends CI_Controller {
 
+	// public $progress=0;
+
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('M_buku');
+
 		// $this->load->model('M_dashboard');
 		 //$this->load->library('pdf');
 
@@ -27,6 +31,7 @@ class Buku extends CI_Controller {
 		$data['buku']=$this->M_buku->select_buku_database();
 
 		$this->load->view('v_koleksi_buku',$data);
+
 
 	}
 
@@ -236,14 +241,31 @@ class Buku extends CI_Controller {
 
 		}
 
+	public function menu_sync(){
+		$this->session->set_userdata('progress', 0);
+		$curr=$this->M_buku->select_data_curr()->row();
+		$data['tahapan']= $curr->tahapan;
+		$data['status_sync']= $curr->status_sync;
+		$data['jumlah_buku']= $this->M_buku->hasil_rekomendasi()->num_rows();
+
+          
+		$this->load->view('v_syncron',$data);
+	}
+
 	public function sync(){
 
+        $this->session->set_userdata('progress', 0);
+
 		$buku_terpilih= $this->M_buku->hasil_rekomendasi();
+		$jumlah_buku = $buku_terpilih->num_rows();
+		$no=1;
+
 		foreach ($buku_terpilih->result() as $row){
 
 			//cek dan insert penerbit
 
 			$id_penerbit= $this->M_buku->cek_penerbit($row->penerbit);
+
 
 		
 			$data_biblio = array(
@@ -295,13 +317,33 @@ class Buku extends CI_Controller {
 
 			);
 			$this->db->insert('search_biblio', $data_search_biblio);
+			$this->progress = $no/$jumlah_buku*100;
+			$this->session->set_userdata('progress', $this->progress);
 			
+			// echo round($this->progress,2).' ';
+			// sleep(1);  //Simulate a time-consuming process
+            $no++;
 
 		}
+
+		// $this->session->set_userdata('progress', 100);
+  		// echo json_encode(array('progress' => 100));
+
+  		$this->M_buku->update_sync(1);
 
 
 
 	}
+
+	public function get_progress() {
+        $progress = $this->session->userdata('progress');
+        echo json_encode(array('progress' => $progress));
+    }
+
+	// public function progress(){
+	// 	  $data['progress']=$round($this->progress,2);
+	// 	  $this->load->view('v_progress',$data);
+	// }
 
 
 
