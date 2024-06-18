@@ -117,6 +117,13 @@ class Buku extends CI_Controller {
 
         } 
 
+    public function detail_buku_database($id)
+        {
+            $detail=$this->M_buku->select_biblio($id)->row();
+            echo json_encode($detail);
+
+        } 
+
     public function update_buku(){
 
           $id = $this->input->post('id');
@@ -308,6 +315,7 @@ class Buku extends CI_Controller {
 			'author' => $row->pengarang,
 			'gmd'=> 'text',
 			'publisher'=> $row->penerbit,
+			'publish_year' => $row->tahun,
 			'language'=>$bahasa,
 			'classification'=> 'NONE',
 			'opac_hide'=>0,

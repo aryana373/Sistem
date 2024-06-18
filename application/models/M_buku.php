@@ -54,9 +54,12 @@ class M_buku extends CI_Model {
 
 	public function select_buku_database(){
 
-      $this->db->select('*');
-      $this->db->where('status','1');
-	  return $this->db->get('tb_buku');
+   //    $this->db->select('*');
+   //    $this->db->where('status','1');
+	  // return $this->db->get('tb_buku');
+	  $this->db->select('*');
+	  return $this->db->get('search_biblio');
+
 	}
 	public function katalog(){
 
@@ -85,6 +88,12 @@ class M_buku extends CI_Model {
       $this->db->select('*');
 	  $this->db->where('id_buku',$id);
 	  return $this->db->get('tb_buku');
+	}
+	public function select_biblio($id){
+
+      $this->db->select('*');
+	  $this->db->where('biblio_id',$id);
+	  return $this->db->get('search_biblio');
 	}
 
 	public function update_buku($id,$judul,$pengarang, $penerbit, $tahun, $harga, $bahasa, $isbn)
@@ -216,11 +225,20 @@ class M_buku extends CI_Model {
 	
 	 	//SELECT * FROM `tb_buku` WHERE `status`=2 AND`jumlah`!=0 AND `ISBN` IN (SELECT `ISBN` FROM `tb_buku` WHERE `status`=1);
 
-	 	$this->db->select('id_buku');
-		$this->db->where('status','2');
-		$this->db->where('jumlah!=0');
-		$this->db->where('ISBN IN (SELECT ISBN FROM tb_buku WHERE status=1)');
-		return $this->db->get('tb_buku');
+	 // 	$this->db->select('id_buku');
+		// $this->db->where('status','2');
+		// $this->db->where('jumlah!=0');
+		// $this->db->where('ISBN IN (SELECT ISBN FROM tb_buku WHERE status=1)');
+		// return $this->db->get('tb_buku');
+		
+		$this->db->select('id_buku');
+		$this->db->from('tb_buku');
+		$this->db->where('status', '2');
+		$this->db->where('jumlah !=', 0);
+		$this->db->where('ISBN COLLATE utf8_general_ci IN (SELECT isbn_issn COLLATE utf8_general_ci FROM biblio)', NULL, FALSE);
+
+		return  $this->db->get();
+		
 	}
 
 	public function proses_hapus_dupliat(){
@@ -232,7 +250,7 @@ class M_buku extends CI_Model {
 			);
 		$this->db->where('status','2');
 		$this->db->where('jumlah!=0');
-		$this->db->where('ISBN IN (SELECT ISBN FROM tb_buku WHERE status=1)');
+		$this->db->where('ISBN COLLATE utf8_general_ci IN (SELECT isbn_issn COLLATE utf8_general_ci FROM biblio)', NULL, FALSE);
 		$this->db->update('tb_buku', $data);
 
 

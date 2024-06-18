@@ -47,12 +47,12 @@ require('v_header.php');
                  <?php foreach ($buku->result() as $row): ?>
                     <tr>
                        <td style="text-align: center;"><?php echo $i; $i++; ?></td>
-                       <td><?php echo $row->judul; ?></td>
-                       <td><?php echo $row->pengarang; ?></td>
-                       <td><?php echo $row->tahun; ?></td>
+                       <td><?php echo $row->title; ?></td>
+                       <td><?php echo $row->author; ?></td>
+                       <td><?php echo $row->publish_year; ?></td>
                        <td style=" width: 100px;text-align: center;">
                             <div class="btn-group">
-                                <button onclick="detail(<?php echo $row->id_buku; ?>);" class="btn btn-primary btn-flat" type="button" data-toggle="tooltip" title="Detail"><i class="fa fa-search"></i></button>  
+                                <button onclick="detail(<?php echo $row->biblio_id; ?>);" class="btn btn-primary btn-flat" type="button" data-toggle="tooltip" title="Detail"><i class="fa fa-search"></i></button>  
                                 
                             </div>
                         </td>
@@ -167,16 +167,16 @@ require('v_footer.php');
       
 
             $('#modalDetail').modal();
-            $.get("<?php echo base_url();?>"+"Buku/detail_buku/"+id, function(detail) {
+            $.get("<?php echo base_url();?>"+"Buku/detail_buku_database/"+id, function(detail) {
             var detail=jQuery.parseJSON(detail+"");
-              $('#detail_judul').val(detail.judul);
-              $('#detail_pengarang').val(detail.pengarang);
-              $('#detail_penerbit').val(detail.penerbit);
-              $('#detail_tgl').val(detail.tgl_input);
-              $('#detail_tahun').val(detail.tahun);
+              $('#detail_judul').val(detail.title);
+              $('#detail_pengarang').val(detail.author);
+              $('#detail_penerbit').val(detail.publisher);
+              $('#detail_tgl').val(detail.input_date);
+              $('#detail_tahun').val(detail.publish_year);
               //$('#detail_harga').val(detail.harga);
-              $('#detail_bahasa').val(detail.bahasa);
-              $('#detail_isbn').val(detail.isbn);
+              $('#detail_bahasa').val(detail.language);
+              $('#detail_isbn').val(detail.isbn_issn);
               
             
               //console.log(lokasi.nama);
