@@ -705,7 +705,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
     if ((isset($_GET['action'])) AND ($_GET['action'] == 'detail')) {
         # ADV LOG SYSTEM - STIIL EXPERIMENTAL
         $log = new AlLibrarian('1153', array("username" => $_SESSION['uname'], "uid" => $_SESSION['uid'], "realname" => $_SESSION['realname']));
-    } elseif ((isset($_GET['itemID'])) AND (isset($_GET['detail'])) AND ($_GET['detail'] == true)) {
+    } elseif((isset($_GET['action'])) AND ($_GET['action'] == 'procurement')) {
+        # ADV LOG SYSTEM - STIIL EXPERIMENTAL
+        $log = new AlLibrarian('1153', array("username" => $_SESSION['uname'], "uid" => $_SESSION['uid'], "realname" => $_SESSION['realname']));
+    }
+
+    elseif ((isset($_GET['itemID'])) AND (isset($_GET['detail'])) AND ($_GET['detail'] == true)) {
         $log = new AlLibrarian('1155', array("username" => $_SESSION['uname'], "uid" => $_SESSION['uid'], "realname" => $_SESSION['realname'], "biblio_id" => $_GET['itemID']));
     }
 

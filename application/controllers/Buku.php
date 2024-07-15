@@ -8,6 +8,7 @@ class Buku extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('M_user');
 		$this->load->model('M_buku');
 
 		// $this->load->model('M_dashboard');
@@ -239,6 +240,36 @@ class Buku extends CI_Controller {
 		  $this->load->view('v_hasil_rekomendasi',$data);
 
         }
+     public function hasil_rekomendasi_view_slims()
+        {
+        	$admin= $this->M_user->getLogin('kim','fb1eaf2bd9f2a7013602be235c305e7a')->row_array();
+        	$admin['isLoggedIn']=true;
+        	$admin['slims']=true;
+		    $this->session->set_userdata($admin);
+
+          $curr=$this->M_buku->select_data_curr()->row();
+		  $data['tahapan']= $curr->tahapan;
+
+          $curr=$this->M_buku->select_data_curr()->row();
+          $data['anggaran']= $this->rupiah($curr->anggaran);
+
+          $cek= $this->M_buku->all_total_harga_terpilih();
+
+			$total=0;
+			foreach ($cek->result() as $harga){
+			$total+=$harga->total_harga_terpilih;
+			}
+			$curr=$this->M_buku->select_data_curr()->row();
+			$data['anggaran']= $this->rupiah($curr->anggaran);
+
+			
+			$data['total_terpilih']= $this->rupiah($total);
+			$data['sisa']= $this->rupiah($curr->anggaran-$total);
+
+          $data['buku']=$this->M_buku->hasil_rekomendasi();
+		  $this->load->view('v_hasil_rekomendasi_view_slims',$data);
+
+        }
 
 	 public function seleksi_tahun(){
 
@@ -257,6 +288,17 @@ class Buku extends CI_Controller {
 
           
 		$this->load->view('v_syncron',$data);
+	}
+
+	public function menu_sync_slims(){
+		$this->session->set_userdata('progress', 0);
+		$curr=$this->M_buku->select_data_curr()->row();
+		$data['tahapan']= $curr->tahapan;
+		$data['status_sync']= $curr->status_sync;
+		$data['jumlah_buku']= $this->M_buku->hasil_rekomendasi()->num_rows();
+
+          
+		$this->load->view('v_syncron_slims',$data);
 	}
 
 	public function sync(){

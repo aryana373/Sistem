@@ -17,7 +17,12 @@ class Login extends CI_Controller {
 
 			if ($this->session->userdata('jenis_user')=='admin') {
 				// $this->load->view('v_dashboard');
-				redirect('Dashboard','refresh');
+				if ($this->session->userdata('slims')) {
+					redirect('Buku/hasil_rekomendasi_view_slims','refresh');
+				} else{
+					redirect('Dashboard','refresh');
+				}
+				
 			}
 			else {
 				redirect('User','refresh');
@@ -45,6 +50,7 @@ class Login extends CI_Controller {
 			} else{
 
 				$admin['isLoggedIn']=true;
+				$admin['slims']=false;
 				$this->session->set_userdata($admin);
 				
 					if ($this->session->userdata('jenis_user')=='admin') {
