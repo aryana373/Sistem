@@ -2,24 +2,41 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') ?>">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistem Pengadaan Bahan Pustaka | Dashboard</title>
 
-<?php
-require('v_header.php');
-?>
-<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') ?>">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/jqvmap/jqvmap.min.css') ?>">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/dist/css/adminlte.min.css') ?>">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') ?>">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/daterangepicker/daterangepicker.css') ?>">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/summernote/summernote-bs4.min.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE/plugins/toastr/toastr.min.css') ?>">
+<body class="hold-transition sidebar-mini layout-fixed">
 
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Buku yang dipilih User</h1>
-          </div>
-          
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+
+
+   
 
     <!-- Main content -->
     <section class="content">
@@ -103,8 +120,7 @@ require('v_header.php');
       
       <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
-  </div>
+   
 
   
 
@@ -163,9 +179,38 @@ require('v_header.php');
 
    
 
-  <?php
-require('v_footer.php');
-?>
+ 
+<!-- jQuery -->
+<script src="<?php echo base_url('assets/AdminLTE/plugins/jquery/jquery.min.js"') ?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo base_url('assets/AdminLTE/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url('assets/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+
+
+<!-- AdminLTE App -->
+<script src="<?php echo base_url('assets/AdminLTE/dist/js/adminlte.js') ?>"></script>
+<script src="<?php echo base_url('assets/AdminLTE/dist/js/pages/dashboard.js') ?>"></script>
+<script type="text/javascript">
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+   
+    $('#preloader').css('display','none');
+    $('#preloader2').css('display','none');
+    
+  });
+</script>
+</body>
+</html>
+
+
 <script src="<?php echo base_url('assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/AdminLTE//plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
@@ -235,7 +280,7 @@ require('v_footer.php');
           // //   })
           $('#preloader').css('display','none');
           toastr.success('Data Berhasil Diproses!!')
-          window.location.href = "<?php echo site_url('Buku/pilihan_user/1'); ?>";
+          window.location.href = "<?php echo site_url('Buku/pilihan_user/2'); ?>";
         });
       });
 
@@ -256,7 +301,7 @@ require('v_footer.php');
           // //   })
           $('#preloader').css('display','none');
           toastr.success('Data Berhasil Diproses!!')
-          window.location.href = "<?php echo site_url('Buku/pilihan_user/1'); ?>";
+          window.location.href = "<?php echo site_url('Buku/pilihan_user/2'); ?>";
         });
       });
 

@@ -26,8 +26,12 @@ do_checkIP('smc-bibliography');
 
 $menu[] = array('Header', __('BIBLIOGRAPHIC'));
 $menu[] = array(__('Bibliographic List'), MWB.'bibliography/index.php', __('Show Existing Bibliographic Data'));
-$menu[] = array(__('Procurement Results'), MWB.'bibliography/procurement.php', __('Procurement Results'));
 $menu[] = array(__('Add New Bibliography'), MWB.'bibliography/index.php?action=detail', __('Add New Bibliographic Data/Catalog'));
+
+// $menu[] = array('Header', __('PROCUREMENT'));
+// $menu[] = array(__('Catalog of Book Procurement'), MWB.'bibliography/procurement_catalog.php', __('Catalog of book Procurement'));
+// $menu[] = array(__('Procurement Results'), MWB.'bibliography/procurement.php', __('Procurement Results'));
+
 $menu[] = array('Header', __('ITEMS'));
 $menu[] = array(__('Item List'), MWB.'bibliography/item.php', __('Show List of Library Items'));
 $menu[] = array(__('Checkout Items'), MWB.'bibliography/checkout_item.php', __('Show List of Checkout Items'));

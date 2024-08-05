@@ -43,6 +43,13 @@ class Buku extends CI_Controller {
 		$this->load->view('v_katalog',$data);
 
 	}
+	public function katalog_slims(){
+
+		$data['buku']=$this->M_buku->katalog();
+
+		$this->load->view('v_katalog_slims',$data);
+
+	}
 
 	// public function tambah_katalog(){
 	// 	$judul = $this->input->post('judul');
@@ -143,7 +150,7 @@ class Buku extends CI_Controller {
     }
 
 
-    public function pilihan_user(){
+    public function pilihan_user($id_view){
 
     	$curr=$this->M_buku->select_data_curr()->row();
 		$data['tahapan']= $curr->tahapan;
@@ -163,9 +170,18 @@ class Buku extends CI_Controller {
 
 
     	$data['buku']=$this->M_buku->select_all_buku_terpilih();
-		$this->load->view('v_buku_pilihan_user',$data);
+
+    	if ($id_view==1) {
+    		$this->load->view('v_buku_pilihan_user',$data);
+    	}
+    	else if ($id_view==2) {
+    		$this->load->view('v_buku_pilihan_user_slims',$data);
+    	}
+		
 
 	}
+
+
 
     //Menu User
 

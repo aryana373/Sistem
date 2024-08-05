@@ -141,7 +141,7 @@
           </li>
           
           <li class="nav-item">
-            <a id="terpilih_user" href="<?php echo base_url('Buku/pilihan_user') ?>" class="nav-link">
+            <a id="terpilih_user" href="<?php echo base_url('Buku/pilihan_user/1') ?>" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Seleksi Pengadaan
