@@ -1,0 +1,17 @@
+Yang dirubah
+
+Template/default/parts/_navbar.php
+- Menambah navigasi
+
+Menambah Admin/modules/procements/procurement_catalog.php
+Menambah Admin/modules/procements/procurement_selection.php
+
+
+Database:
+- tb_bantu_pilih
+- tb_buku
+- tb_curr_tahapan
+- tb_status
+- tb_operator
+
+Pada mst_module menambahkan procurements
