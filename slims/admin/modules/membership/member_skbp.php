@@ -1,0 +1,1 @@
+<iframe src="http://localhost/Sistem/Surket/menu_input_slims" height="600px" width="100%"></iframe>

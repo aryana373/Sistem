@@ -33,12 +33,26 @@ class Surket extends CI_Controller {
     $this->load->view('surket/v_input_surket');
 
   }
+  public function menu_input_slims(){
+
+  
+     
+    $this->load->view('surket/v_input_surket_slims');
+
+  }
 
   public function menu_cari(){
 
     $data['surket']=$this->M_surket->allSurket();
 
     $this->load->view('surket/v_cari_surket',$data);
+
+  }
+  public function menu_cari_slims(){
+
+    $data['surket']=$this->M_surket->allSurket();
+
+    $this->load->view('surket/v_cari_surket_slims',$data);
 
   }
 
