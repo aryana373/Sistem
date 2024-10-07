@@ -48,6 +48,26 @@ class Dashboard extends CI_Controller {
 
 	}
 
+	public function dashboard_slims(){
+
+	
+		$data['database']= $this->M_buku->total_database_buku();
+		$data['katalog']= $this->M_buku->total_katalog_buku();
+		$data['pengguna']= $this->M_buku->total_pengguna();
+		$data['buku_terpilih']= $this->M_buku->total_buku_terpilih();
+
+		$cek=$this->M_buku->select_curr_tahapan();
+		$data['curr']=$cek;
+
+		foreach ($cek->result() as $row){
+		
+		$data['anggaran']= $this->rupiah($row->anggaran);
+		}
+	   
+		$this->load->view('v_dashboard_slims',$data);
+
+	}
+
 	public function detail_curr(){
 		$detail= $this->M_buku->select_curr_tahapan()->row();;
 		echo json_encode($detail);
@@ -84,6 +104,7 @@ class Dashboard extends CI_Controller {
 			'anggaran' => $anggaran,
 			'tgl_selesai_input' => $tanggal,
 			'tahapan' => $tahap,
+			'status_sync' => '0',
 			);
 
 		$this->db->where('id','1');

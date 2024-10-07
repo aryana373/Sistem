@@ -346,6 +346,9 @@ class Buku extends CI_Controller {
 			'uid'=> 1,
 			);
 
+
+
+
 			
 
 			$this->db->insert('biblio', $data_biblio);
@@ -385,6 +388,14 @@ class Buku extends CI_Controller {
 			$this->db->insert('search_biblio', $data_search_biblio);
 			$this->progress = $no/$jumlah_buku*100;
 			$this->session->set_userdata('progress', $this->progress);
+
+
+			$data_status= array(
+				'status'=>'1');
+			$this->db->where('id_buku',$row->id_buku);
+			$this->db->update('tb_buku', $data_status);
+
+			$this->db->empty_table('tb_bantu_pilih');
 			
 			// echo round($this->progress,2).' ';
 			// sleep(1);  //Simulate a time-consuming process

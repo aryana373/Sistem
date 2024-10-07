@@ -6,6 +6,7 @@ class Surket extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('M_surket');
+    $this->load->model('M_user');
 		$this->load->library('Pdfa');
 
 		if (!$this->session->userdata('isLoggedIn')){
@@ -35,7 +36,10 @@ class Surket extends CI_Controller {
   }
   public function menu_input_slims(){
 
-  
+  $admin= $this->M_user->getLogin('kim','fb1eaf2bd9f2a7013602be235c305e7a')->row_array();
+          $admin['isLoggedIn']=true;
+          $admin['skbp']=true;
+        $this->session->set_userdata($admin);
      
     $this->load->view('surket/v_input_surket_slims');
 

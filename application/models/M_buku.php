@@ -12,8 +12,8 @@ class M_buku extends CI_Model {
 	}
 
 	function total_database_buku(){
-	  $this->db->where('status','1');
-      return $this->db->count_all_results('tb_buku');
+	  
+      return $this->db->count_all_results('search_biblio');
 	 
 	}
 	function total_katalog_buku(){

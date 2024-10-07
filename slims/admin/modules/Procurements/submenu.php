@@ -29,5 +29,6 @@ do_checkIP('smc-bibliography');
 $menu[] = array('Header', __('PROCUREMENT'));
 
 $menu[] = array(__('Procurement Results'), MWB.'Procurements/procurement.php', __('Procurement Results'));
+$menu[] = array(__('Procurement Dashboard'), MWB.'Procurements/procurement_dashboard.php', __('Procurement Dashboard'));
 $menu[] = array(__('Selection Process'), MWB.'Procurements/procurement_selection.php', __('Procurement Results'));
 $menu[] = array(__('Catalog of Book Procurement'), MWB.'Procurements/procurement_catalog.php', __('Catalog of book Procurement'));
